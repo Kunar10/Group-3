@@ -1,6 +1,6 @@
-/* ===== BUGEMA UNIVERSITY - WOW EFFECTS ===== */
+﻿/* ===== BUGEMA UNIVERSITY - WOW EFFECTS ===== */
 
-// ── 1. PARTICLE CANVAS BACKGROUND ──────────────────────────────────────────
+//  1. PARTICLE CANVAS BACKGROUND 
 function initParticles(canvasId) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
@@ -66,7 +66,7 @@ function initParticles(canvasId) {
   animate();
 }
 
-// ── 2. TYPEWRITER EFFECT ────────────────────────────────────────────────────
+//  2. TYPEWRITER EFFECT 
 function typeWriter(elementId, texts, speed = 80) {
   const el = document.getElementById(elementId);
   if (!el) return;
@@ -95,7 +95,7 @@ function typeWriter(elementId, texts, speed = 80) {
   type();
 }
 
-// ── 3. SCROLL REVEAL ────────────────────────────────────────────────────────
+//  3. SCROLL REVEAL 
 function initScrollReveal() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -109,7 +109,7 @@ function initScrollReveal() {
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 }
 
-// ── 4. COUNTER ANIMATION ────────────────────────────────────────────────────
+//  4. COUNTER ANIMATION 
 function initCounters() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -132,10 +132,10 @@ function initCounters() {
   document.querySelectorAll('.counter').forEach(el => observer.observe(el));
 }
 
-// ── 5. BACK TO TOP BUTTON ───────────────────────────────────────────────────
+//  5. BACK TO TOP BUTTON 
 function initBackToTop() {
   const btn = document.createElement('button');
-  btn.innerHTML = '↑';
+  btn.innerHTML = '';
   btn.setAttribute('aria-label', 'Back to top');
   btn.style.cssText = `
     position:fixed; bottom:28px; right:28px; z-index:999;
@@ -162,7 +162,7 @@ function initBackToTop() {
   btn.addEventListener('mouseleave', () => { btn.style.background = 'linear-gradient(135deg,#003366,#004488)'; btn.style.color = '#C8960C'; });
 }
 
-// ── 6. NAVBAR SCROLL EFFECT ─────────────────────────────────────────────────
+//  6. NAVBAR SCROLL EFFECT 
 function initNavScroll() {
   const nav = document.querySelector('nav');
   if (!nav) return;
@@ -177,7 +177,7 @@ function initNavScroll() {
   });
 }
 
-// ── 7. CARD TILT EFFECT ─────────────────────────────────────────────────────
+//  7. CARD TILT EFFECT 
 function initTilt() {
   document.querySelectorAll('.tilt').forEach(card => {
     card.addEventListener('mousemove', e => {
@@ -195,7 +195,7 @@ function initTilt() {
   });
 }
 
-// ── 8. GLOWING CURSOR TRAIL ─────────────────────────────────────────────────
+//  8. GLOWING CURSOR TRAIL 
 function initCursorTrail() {
   const trail = [];
   const count = 8;
@@ -231,7 +231,7 @@ function initCursorTrail() {
   animateTrail();
 }
 
-// ── 9. PAGE LOAD SPLASH ─────────────────────────────────────────────────────
+//  9. PAGE LOAD SPLASH 
 function initSplash() {
   const splash = document.createElement('div');
   splash.style.cssText = `
@@ -265,7 +265,7 @@ function initSplash() {
   });
 }
 
-// ── INIT ALL ────────────────────────────────────────────────────────────────
+//  INIT ALL 
 document.addEventListener('DOMContentLoaded', () => {
   initParticles('hero-canvas');
   initScrollReveal();

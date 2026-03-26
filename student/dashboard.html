@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Dashboard — Bugema University</title>
+  <title>Student Dashboard  Bugema University</title>
   <link rel="stylesheet" href="../styles.css">
   <style>
     body { background:var(--bg); }
@@ -40,20 +40,20 @@
         <span>Student<br>Portal</span>
       </div>
       <nav>
-        <a href="#" class="active">🏠 Dashboard</a>
-        <a href="../task3-timetable.html" target="_blank">📅 Timetable</a>
-        <a href="../task5-useful-links.html" target="_blank">🔗 Resources</a>
-        <a href="../task7-home.html" target="_blank">🌐 Website</a>
+        <a href="#" class="active"> Dashboard</a>
+        <a href="../task3-timetable.html" target="_blank"> Timetable</a>
+        <a href="../task5-useful-links.html" target="_blank"> Resources</a>
+        <a href="../task7-home.html" target="_blank"> Website</a>
       </nav>
       <div class="sidebar-footer">
-        <a href="#" onclick="logout()">🚪 Logout</a>
+        <a href="#" onclick="logout()"> Logout</a>
       </div>
     </aside>
 
     <main class="main">
       <div class="dash-header">
         <h1>Student Dashboard</h1>
-        <span style="font-size:0.85em;color:var(--text-light);">🕐 <span id="live-clock"></span></span>
+        <span style="font-size:0.85em;color:var(--text-light);"> <span id="live-clock"></span></span>
       </div>
 
       <div class="welcome-card">
@@ -65,22 +65,22 @@
       </div>
 
       <div class="info-grid">
-        <div class="info-box"><div class="lbl">Registration No.</div><div class="val" id="s-reg">—</div></div>
-        <div class="info-box"><div class="lbl">Programme</div><div class="val" id="s-course">—</div></div>
-        <div class="info-box"><div class="lbl">Year of Study</div><div class="val" id="s-year">—</div></div>
-        <div class="info-box"><div class="lbl">Status</div><div class="val" style="color:#2d8a4e;">Active ✓</div></div>
+        <div class="info-box"><div class="lbl">Registration No.</div><div class="val" id="s-reg"></div></div>
+        <div class="info-box"><div class="lbl">Programme</div><div class="val" id="s-course"></div></div>
+        <div class="info-box"><div class="lbl">Year of Study</div><div class="val" id="s-year"></div></div>
+        <div class="info-box"><div class="lbl">Status</div><div class="val" style="color:#2d8a4e;">Active </div></div>
       </div>
 
       <div class="card" style="margin-bottom:20px;">
-        <h3>📅 Today's Classes</h3>
+        <h3> Today's Classes</h3>
         <div id="todays-classes" style="margin-top:12px;"></div>
       </div>
 
       <div class="card">
-        <h3>📢 Announcements</h3>
+        <h3> Announcements</h3>
         <div style="margin-top:12px;">
-          <div class="announcement"><span class="icon">📢</span><p><strong>2026 Exams:</strong> End of semester exams begin 15th July 2026. Check the timetable for your schedule.</p></div>
-          <div class="announcement" style="margin-top:10px;"><span class="icon">📚</span><p><strong>Library:</strong> Extended hours during exam period — open until 10:00 PM Monday to Friday.</p></div>
+          <div class="announcement"><span class="icon"></span><p><strong>2026 Exams:</strong> End of semester exams begin 15th July 2026. Check the timetable for your schedule.</p></div>
+          <div class="announcement" style="margin-top:10px;"><span class="icon"></span><p><strong>Library:</strong> Extended hours during exam period  open until 10:00 PM Monday to Friday.</p></div>
         </div>
       </div>
     </main>
@@ -122,9 +122,9 @@
       const classes = schedule[day] || [];
       const el = document.getElementById('todays-classes');
       if (!classes.length) {
-        el.innerHTML = '<p style="color:var(--text-light);">No classes today. Enjoy your day! 🎉</p>';
+        el.innerHTML = '<p style="color:var(--text-light);">No classes today. Enjoy your day! </p>';
       } else {
-        el.innerHTML = classes.map(c => `<div style="padding:8px 14px;background:var(--bg);border-radius:var(--radius-sm);margin-bottom:8px;border-left:3px solid var(--gold);font-size:0.9em;">📖 ${c}</div>`).join('');
+        el.innerHTML = classes.map(c => `<div style="padding:8px 14px;background:var(--bg);border-radius:var(--radius-sm);margin-bottom:8px;border-left:3px solid var(--gold);font-size:0.9em;"> ${c}</div>`).join('');
       }
     }
 
@@ -144,3 +144,4 @@
   </script>
 </body>
 </html>
+

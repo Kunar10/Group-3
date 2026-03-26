@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login — Bugema University</title>
+  <title>Admin Login  Bugema University</title>
   <link rel="stylesheet" href="../styles.css">
   <style>
     body { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: var(--gradient); }
@@ -18,7 +18,7 @@
   <div class="login-box">
     <img src="../badge.png" alt="Logo">
     <h2>Admin Portal</h2>
-    <p>Bugema University — Department of Computing</p>
+    <p>Bugema University  Department of Computing</p>
     <div id="login-error"></div>
     <form id="login-form">
       <div class="form-row">
@@ -27,9 +27,9 @@
       </div>
       <div class="form-row">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="••••••••" required>
+        <input type="password" id="password" name="password" placeholder="" required>
       </div>
-      <input type="submit" value="Sign In →" style="width:100%; margin-top:8px;">
+      <input type="submit" value="Sign In " style="width:100%; margin-top:8px;">
     </form>
   </div>
 
@@ -39,7 +39,7 @@
       const err = document.getElementById('login-error');
       err.style.display = 'none';
       const btn = this.querySelector('input[type="submit"]');
-      btn.value = 'Signing in…'; btn.disabled = true;
+      btn.value = 'Signing in'; btn.disabled = true;
 
       const data = new FormData(this);
       try {
@@ -50,14 +50,15 @@
         } else {
           err.textContent = json.error || 'Login failed.';
           err.style.display = 'block';
-          btn.value = 'Sign In →'; btn.disabled = false;
+          btn.value = 'Sign In '; btn.disabled = false;
         }
       } catch {
         err.textContent = 'Server error. Is WAMP running?';
         err.style.display = 'block';
-        btn.value = 'Sign In →'; btn.disabled = false;
+        btn.value = 'Sign In '; btn.disabled = false;
       }
     });
   </script>
 </body>
 </html>
+

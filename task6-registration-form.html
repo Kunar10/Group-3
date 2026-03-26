@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Registration — Bugema University</title>
+  <title>Student Registration  Bugema University</title>
   <link rel="stylesheet" href="styles.css">
   <style>
     .section-title {
@@ -26,7 +26,7 @@
 <body>
   <div class="container">
     <nav>
-      <a href="index.html">🏠 Hub</a>
+      <a href="index.html"> Hub</a>
       <a href="task1-department.html">Department</a>
       <a href="task2-profile.html">Profile</a>
       <a href="task3-timetable.html">Timetable</a>
@@ -38,18 +38,18 @@
     <div class="hero">
       <img src="badge.png" alt="Bugema University Logo">
       <h1>Student Registration</h1>
-      <p>Apply to the Department of Computing and Informatics — Academic Year 2026</p>
+      <p>Apply to the Department of Computing and Informatics  Academic Year 2026</p>
     </div>
 
     <div class="page-content" style="max-width: 780px; margin: 0 auto;">
 
       <!-- Success Message -->
       <div id="success-msg" style="display:none; text-align:center; padding:50px 30px; background: rgba(67,233,123,0.08); border-radius: var(--radius); border: 2px solid #43e97b;">
-        <div style="font-size:4em; margin-bottom:16px;">🎉</div>
+        <div style="font-size:4em; margin-bottom:16px;"></div>
         <h2 style="color: #2d8a4e; border:none; justify-content:center;">Application Submitted!</h2>
-        <p style="color: var(--text-light);">Your application has been received. You will be contacted via email within 5–7 working days.</p>
+        <p style="color: var(--text-light);">Your application has been received. You will be contacted via email within 57 working days.</p>
         <p id="ref-num" style="font-weight:700; color: var(--primary); font-size:1.1em;"></p>
-        <a href="index.html" class="btn" style="margin-top: 20px;">Back to Hub →</a>
+        <a href="index.html" class="btn" style="margin-top: 20px;">Back to Hub </a>
       </div>
 
       <div id="error-msg" style="display:none; padding:16px 20px; background: rgba(245,87,108,0.1); border-radius: var(--radius-sm); border-left: 4px solid #f5576c; margin-bottom: 20px; color: #c0392b;"></div>
@@ -70,7 +70,7 @@
           <div class="form-row">
             <label>Gender <span class="required-star">*</span></label>
             <select name="gender" required>
-              <option value="">— Select —</option>
+              <option value=""> Select </option>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
@@ -113,7 +113,7 @@
           <div class="form-row">
             <label>Programme Applied For <span class="required-star">*</span></label>
             <select name="course" required>
-              <option value="">— Select Programme —</option>
+              <option value=""> Select Programme </option>
               <option value="bit">Bachelor of Information Technology (4 yrs)</option>
               <option value="bcs">Bachelor of Computer Science (4 yrs)</option>
               <option value="dse">Diploma in Software Engineering (2 yrs)</option>
@@ -123,7 +123,7 @@
           <div class="form-row">
             <label>Intended Entry Year <span class="required-star">*</span></label>
             <select name="entry_year" required>
-              <option value="">— Select Year —</option>
+              <option value=""> Select Year </option>
               <option value="2026">2026</option>
               <option value="2027">2027</option>
             </select>
@@ -166,7 +166,7 @@
             <div class="form-row">
               <label>Aggregate Grade <span class="required-star">*</span></label>
               <select name="o_level_grade" required>
-                <option value="">— Select —</option>
+                <option value=""> Select </option>
                 <option value="D1">Division 1 (D1)</option>
                 <option value="D2">Division 2 (D2)</option>
                 <option value="D3">Division 3 (D3)</option>
@@ -241,13 +241,13 @@
 
         <div id="form-error" style="display:none; color:#c0392b; font-size:0.9em; margin-bottom:12px; padding:10px 14px; background:rgba(245,87,108,0.08); border-radius:var(--radius-sm);"></div>
 
-        <input type="submit" value="Submit Application →">
+        <input type="submit" value="Submit Application ">
         <p class="hint" style="margin-top:12px;">Fields marked <span class="required-star">*</span> are required. You will receive a confirmation email after submission.</p>
       </form>
     </div>
 
     <div class="footer">
-      <p>© 2026 Bugema University — Department of Computing and Informatics</p>
+      <p>© 2026 Bugema University  Department of Computing and Informatics</p>
     </div>
   </div>
 
@@ -271,7 +271,7 @@
       }
 
       const btn = this.querySelector('input[type="submit"]');
-      btn.value = 'Submitting…';
+      btn.value = 'Submitting';
       btn.disabled = true;
 
       const data = new FormData(this);
@@ -288,13 +288,13 @@
         } else {
           errBox.textContent = json.error || 'Submission failed. Please try again.';
           errBox.style.display = 'block';
-          btn.value = 'Submit Application →';
+          btn.value = 'Submit Application ';
           btn.disabled = false;
         }
       } catch (err) {
         errBox.textContent = 'Network error. Make sure the server is running.';
         errBox.style.display = 'block';
-        btn.value = 'Submit Application →';
+        btn.value = 'Submit Application ';
         btn.disabled = false;
       }
     });
@@ -302,5 +302,6 @@
   <script src="interactivity.js"></script>
 </body>
 </html>
+
 
 

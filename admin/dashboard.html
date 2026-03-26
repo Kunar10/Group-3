@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard — Bugema University</title>
+  <title>Admin Dashboard  Bugema University</title>
   <link rel="stylesheet" href="../styles.css">
   <style>
     body { background: var(--bg); }
@@ -97,11 +97,11 @@
         <span>Bugema University<br><small style="opacity:0.6;font-weight:400;">Admin Panel</small></span>
       </div>
       <nav>
-        <a href="#" class="active" onclick="showSection('registrations')">📋 Registrations</a>
-        <a href="../index.html" target="_blank">🌐 View Website</a>
+        <a href="#" class="active" onclick="showSection('registrations')"> Registrations</a>
+        <a href="../index.html" target="_blank"> View Website</a>
       </nav>
       <div class="sidebar-footer">
-        <a href="#" onclick="logout()">🚪 Logout</a>
+        <a href="#" onclick="logout()"> Logout</a>
       </div>
     </aside>
 
@@ -115,33 +115,33 @@
       <!-- Stats -->
       <div class="stats-grid">
         <div class="stat-box">
-          <div class="num" id="stat-total">—</div>
+          <div class="num" id="stat-total"></div>
           <div class="lbl">Total Applications</div>
         </div>
         <div class="stat-box pending">
-          <div class="num" id="stat-pending">—</div>
+          <div class="num" id="stat-pending"></div>
           <div class="lbl">Pending Review</div>
         </div>
         <div class="stat-box approved">
-          <div class="num" id="stat-approved">—</div>
+          <div class="num" id="stat-approved"></div>
           <div class="lbl">Approved</div>
         </div>
         <div class="stat-box rejected">
-          <div class="num" id="stat-rejected">—</div>
+          <div class="num" id="stat-rejected"></div>
           <div class="lbl">Rejected</div>
         </div>
       </div>
 
       <!-- Toolbar -->
       <div class="toolbar">
-        <input type="text" id="search-input" placeholder="🔍  Search by name, email or ID…" oninput="loadRegistrations()">
+        <input type="text" id="search-input" placeholder="  Search by name, email or ID" oninput="loadRegistrations()">
         <select id="status-filter" onchange="loadRegistrations()">
           <option value="">All Statuses</option>
           <option value="pending">Pending</option>
           <option value="approved">Approved</option>
           <option value="rejected">Rejected</option>
         </select>
-        <button class="action-btn btn-view" onclick="loadRegistrations()" style="padding:10px 18px;">↻ Refresh</button>
+        <button class="action-btn btn-view" onclick="loadRegistrations()" style="padding:10px 18px;"> Refresh</button>
       </div>
 
       <!-- Table -->
@@ -160,7 +160,7 @@
             </tr>
           </thead>
           <tbody id="reg-table-body">
-            <tr><td colspan="8" style="text-align:center; padding:40px; color:var(--text-light);">Loading…</td></tr>
+            <tr><td colspan="8" style="text-align:center; padding:40px; color:var(--text-light);">Loading</td></tr>
           </tbody>
         </table>
       </div>
@@ -170,7 +170,7 @@
   <!-- Detail Modal -->
   <div class="modal-overlay" id="detail-modal">
     <div class="modal">
-      <button class="modal-close" onclick="closeModal()">✕</button>
+      <button class="modal-close" onclick="closeModal()"></button>
       <h2 id="modal-title" style="border:none; margin-bottom:4px;"></h2>
       <div id="modal-body"></div>
     </div>
@@ -204,7 +204,7 @@
 
       const tbody = document.getElementById('reg-table-body');
       if (!data.length) {
-        tbody.innerHTML = '<tr><td colspan="8"><div class="empty-state"><div>📭</div>No applications found.</div></td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8"><div class="empty-state"><div></div>No applications found.</div></td></tr>';
         return;
       }
 
@@ -219,8 +219,8 @@
           <td style="color:var(--text-light);">${new Date(r.submitted_at).toLocaleDateString()}</td>
           <td style="display:flex; gap:6px; flex-wrap:wrap;">
             <button class="action-btn btn-view" onclick="viewDetail(${r.id})">View</button>
-            ${r.status !== 'approved' ? `<button class="action-btn btn-approve" onclick="updateStatus(${r.id},'approved')">✓</button>` : ''}
-            ${r.status !== 'rejected' ? `<button class="action-btn btn-reject" onclick="updateStatus(${r.id},'rejected')">✗</button>` : ''}
+            ${r.status !== 'approved' ? `<button class="action-btn btn-approve" onclick="updateStatus(${r.id},'approved')"></button>` : ''}
+            ${r.status !== 'rejected' ? `<button class="action-btn btn-reject" onclick="updateStatus(${r.id},'rejected')"></button>` : ''}
           </td>
         </tr>
       `).join('');
@@ -263,9 +263,9 @@
 
           <div class="detail-section"><h4>Actions</h4></div>
           <div style="grid-column:1/-1; display:flex; gap:10px;">
-            ${r.status !== 'approved' ? `<button class="action-btn btn-approve" style="padding:8px 20px;" onclick="updateStatus(${r.id},'approved'); closeModal();">✓ Approve</button>` : ''}
-            ${r.status !== 'rejected' ? `<button class="action-btn btn-reject" style="padding:8px 20px;" onclick="updateStatus(${r.id},'rejected'); closeModal();">✗ Reject</button>` : ''}
-            ${r.status !== 'pending' ? `<button class="action-btn btn-view" style="padding:8px 20px;" onclick="updateStatus(${r.id},'pending'); closeModal();">↺ Reset to Pending</button>` : ''}
+            ${r.status !== 'approved' ? `<button class="action-btn btn-approve" style="padding:8px 20px;" onclick="updateStatus(${r.id},'approved'); closeModal();"> Approve</button>` : ''}
+            ${r.status !== 'rejected' ? `<button class="action-btn btn-reject" style="padding:8px 20px;" onclick="updateStatus(${r.id},'rejected'); closeModal();"> Reject</button>` : ''}
+            ${r.status !== 'pending' ? `<button class="action-btn btn-view" style="padding:8px 20px;" onclick="updateStatus(${r.id},'pending'); closeModal();"> Reset to Pending</button>` : ''}
           </div>
         </div>
       `;
@@ -298,3 +298,4 @@
   </script>
 </body>
 </html>
+

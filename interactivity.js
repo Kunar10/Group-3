@@ -18,7 +18,7 @@ function showToast(message, type = 'info') {
   if (existing) existing.remove();
 
   const colors = {
-    info:    { bg: '#003366', border: '#C8960C', icon: 'ℹ' },
+    info:    { bg: '#003366', border: '#C8960C', icon: '' },
     success: { bg: '#1a5c2a', border: '#43e97b', icon: '' },
     error:   { bg: '#7a1a1a', border: '#f5576c', icon: '' },
     warning: { bg: '#7a5a00', border: '#C8960C', icon: '' }

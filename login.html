@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login — Bugema University Portal</title>
+  <title>Login  Bugema University Portal</title>
   <link rel="stylesheet" href="styles.css">
   <style>
     body { min-height:100vh; display:flex; align-items:center; justify-content:center; background:var(--gradient); padding:20px; }
@@ -46,20 +46,20 @@
     <div class="login-header">
       <img src="badge.png" alt="Bugema University Logo">
       <h1>Bugema University</h1>
-      <p>Department of Computing and Informatics — Portal Login</p>
+      <p>Department of Computing and Informatics  Portal Login</p>
     </div>
 
     <div class="login-box">
       <!-- Role Selector -->
       <div class="role-tabs" role="tablist" aria-label="Select login role">
         <div class="role-tab active" data-role="student" role="tab" aria-selected="true" tabindex="0" onclick="setRole('student')">
-          <span class="tab-icon">🎓</span>Student
+          <span class="tab-icon"></span>Student
         </div>
         <div class="role-tab" data-role="staff" role="tab" aria-selected="false" tabindex="0" onclick="setRole('staff')">
-          <span class="tab-icon">👨‍🏫</span>Staff
+          <span class="tab-icon"></span>Staff
         </div>
         <div class="role-tab" data-role="admin" role="tab" aria-selected="false" tabindex="0" onclick="setRole('admin')">
-          <span class="tab-icon">🛡️</span>Admin
+          <span class="tab-icon"></span>Admin
         </div>
       </div>
 
@@ -67,7 +67,7 @@
 
       <!-- Demo credentials hint -->
       <div class="hint-box" id="demo-hint">
-        💡 <strong>Demo:</strong> Reg No: <code>BU/2026/0001</code> &nbsp;|&nbsp; Password: <code>password</code>
+         <strong>Demo:</strong> Reg No: <code>BU/2026/0001</code> &nbsp;|&nbsp; Password: <code>password</code>
       </div>
 
       <form id="login-form" novalidate>
@@ -82,25 +82,25 @@
           <label for="password">Password</label>
           <div class="password-wrap">
             <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
-            <button type="button" class="toggle-pw" onclick="togglePassword()" aria-label="Toggle password visibility">👁</button>
+            <button type="button" class="toggle-pw" onclick="togglePassword()" aria-label="Toggle password visibility"></button>
           </div>
         </div>
 
-        <input type="submit" value="Sign In →" style="width:100%;">
+        <input type="submit" value="Sign In " style="width:100%;">
       </form>
 
       <div class="login-footer">
         <p>Don't have an account? <a href="task6-registration-form.html">Register here</a></p>
-        <p style="margin-top:8px;"><a href="task7-home.html">← Back to Website</a></p>
+        <p style="margin-top:8px;"><a href="task7-home.html"> Back to Website</a></p>
       </div>
     </div>
   </div>
 
   <script>
     const hints = {
-      student: '💡 <strong>Student Demo:</strong> Reg No: <code>BU/2026/0001</code> &nbsp;|&nbsp; Password: <code>password</code>',
-      staff:   '💡 <strong>Staff Demo:</strong> Staff ID: <code>STAFF001</code> &nbsp;|&nbsp; Password: <code>Staff@2026</code>',
-      admin:   '💡 <strong>Admin Demo:</strong> Username: <code>admin</code> &nbsp;|&nbsp; Password: <code>password</code>'
+      student: ' <strong>Student Demo:</strong> Reg No: <code>BU/2026/0001</code> &nbsp;|&nbsp; Password: <code>password</code>',
+      staff:   ' <strong>Staff Demo:</strong> Staff ID: <code>STAFF001</code> &nbsp;|&nbsp; Password: <code>Staff@2026</code>',
+      admin:   ' <strong>Admin Demo:</strong> Username: <code>admin</code> &nbsp;|&nbsp; Password: <code>password</code>'
     };
     const labels = {
       student: 'Registration Number / Email',
@@ -135,7 +135,7 @@
       const err = document.getElementById('login-error');
       err.style.display = 'none';
       const btn = this.querySelector('input[type="submit"]');
-      btn.value = 'Signing in…'; btn.disabled = true;
+      btn.value = 'Signing in'; btn.disabled = true;
 
       // Client-side validation
       const username = document.getElementById('username').value.trim();
@@ -143,7 +143,7 @@
       if (!username || !password) {
         err.textContent = 'Please fill in all fields.';
         err.style.display = 'block';
-        btn.value = 'Sign In →'; btn.disabled = false;
+        btn.value = 'Sign In '; btn.disabled = false;
         return;
       }
 
@@ -152,17 +152,17 @@
         const res = await fetch('api/login.php', { method: 'POST', body: data });
         const json = await res.json();
         if (json.success) {
-          btn.value = '✓ Redirecting…';
+          btn.value = ' Redirecting';
           window.location.href = json.redirect;
         } else {
           err.textContent = json.error || 'Login failed. Please try again.';
           err.style.display = 'block';
-          btn.value = 'Sign In →'; btn.disabled = false;
+          btn.value = 'Sign In '; btn.disabled = false;
         }
       } catch {
         err.textContent = 'Server error. Make sure WAMP is running.';
         err.style.display = 'block';
-        btn.value = 'Sign In →'; btn.disabled = false;
+        btn.value = 'Sign In '; btn.disabled = false;
       }
     });
 
@@ -175,3 +175,4 @@
   </script>
 </body>
 </html>
+
