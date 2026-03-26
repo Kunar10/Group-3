@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Bugema University</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body { background: var(--bg); }
+    .admin-layout { display: flex; min-height: 100vh; }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px; flex-shrink: 0;
+      background: var(--dark);
+      padding: 0;
+      display: flex; flex-direction: column;
+      position: sticky; top: 0; height: 100vh;
+    }
+    .sidebar-logo { padding: 28px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); display:flex; align-items:center; gap:12px; }
+    .sidebar-logo img { width:40px; height:40px; border-radius:50%; object-fit:contain; background:white; padding:4px; }
+    .sidebar-logo span { color:white; font-weight:700; font-size:0.95em; line-height:1.3; }
+    .sidebar nav { padding: 16px 12px; flex:1; display:flex; flex-direction:column; gap:4px; }
+    .sidebar nav a { color: rgba(255,255,255,0.65); padding: 10px 14px; border-radius: var(--radius-sm); font-size:0.88em; font-weight:500; display:flex; align-items:center; gap:10px; transition: var(--transition); text-decoration:none; }
+    .sidebar nav a:hover, .sidebar nav a.active { background: rgba(108,99,255,0.25); color:white; }
+    .sidebar-footer { padding: 16px 12px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .sidebar-footer a { color: rgba(255,255,255,0.5); font-size:0.85em; display:flex; align-items:center; gap:8px; padding:8px 14px; border-radius:var(--radius-sm); transition:var(--transition); text-decoration:none; }
+    .sidebar-footer a:hover { color:white; background:rgba(245,87,108,0.2); }
+
+    /* Main */
+    .main { flex:1; padding: 32px; overflow-y:auto; }
+    .page-header { margin-bottom: 28px; }
+    .page-header h1 { font-size:1.6em; border:none; margin:0 0 4px; }
+    .page-header p { color:var(--text-light); margin:0; font-size:0.9em; }
+
+    /* Stats */
+    .stats-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap:16px; margin-bottom:28px; }
+    .stat-box { background:white; border-radius:var(--radius); padding:20px 24px; box-shadow:0 4px 16px rgba(0,0,0,0.06); border-left:4px solid var(--primary); }
+    .stat-box.approved { border-color:#43e97b; }
+    .stat-box.rejected { border-color:#f5576c; }
+    .stat-box.pending { border-color:#fee140; }
+    .stat-box .num { font-size:2em; font-weight:800; color:var(--dark); }
+    .stat-box .lbl { font-size:0.82em; color:var(--text-light); margin-top:2px; }
+
+    /* Toolbar */
+    .toolbar { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px; align-items:center; }
+    .toolbar input[type="text"] { flex:1; min-width:200px; padding:10px 14px; border:2px solid rgba(108,99,255,0.2); border-radius:var(--radius-sm); font-size:0.9em; outline:none; }
+    .toolbar input[type="text"]:focus { border-color:var(--primary); }
+    .toolbar select { padding:10px 14px; border:2px solid rgba(108,99,255,0.2); border-radius:var(--radius-sm); font-size:0.9em; outline:none; background:white; }
+
+    /* Table */
+    .table-card { background:white; border-radius:var(--radius); box-shadow:0 4px 16px rgba(0,0,0,0.06); overflow:hidden; }
+    table { width:100%; border-collapse:collapse; }
+    th { background:var(--gradient); color:white; padding:13px 16px; font-size:0.82em; text-transform:uppercase; letter-spacing:0.5px; text-align:left; }
+    td { padding:13px 16px; border-bottom:1px solid rgba(0,0,0,0.05); font-size:0.88em; vertical-align:middle; }
+    tr:last-child td { border-bottom:none; }
+    tr:hover td { background:rgba(108,99,255,0.03); }
+
+    .status-badge { padding:3px 12px; border-radius:50px; font-size:0.78em; font-weight:700; text-transform:uppercase; }
+    .status-badge.pending { background:rgba(254,225,64,0.2); color:#b8860b; }
+    .status-badge.approved { background:rgba(67,233,123,0.15); color:#2d8a4e; }
+    .status-badge.rejected { background:rgba(245,87,108,0.15); color:#c0392b; }
+
+    .action-btn { padding:5px 12px; border:none; border-radius:50px; font-size:0.78em; font-weight:600; cursor:pointer; transition:var(--transition); }
+    .btn-view { background:rgba(108,99,255,0.1); color:var(--primary); }
+    .btn-approve { background:rgba(67,233,123,0.15); color:#2d8a4e; }
+    .btn-reject { background:rgba(245,87,108,0.15); color:#c0392b; }
+    .action-btn:hover { opacity:0.8; transform:scale(1.05); }
+
+    /* Modal */
+    .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center; padding:20px; }
+    .modal-overlay.open { display:flex; }
+    .modal { background:white; border-radius:var(--radius); max-width:680px; width:100%; max-height:90vh; overflow-y:auto; padding:36px; position:relative; }
+    .modal-close { position:absolute; top:16px; right:20px; background:none; border:none; font-size:1.5em; cursor:pointer; color:var(--text-light); }
+    .detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px 24px; margin-top:16px; }
+    .detail-item label { font-size:0.78em; color:var(--text-light); text-transform:uppercase; letter-spacing:0.5px; display:block; margin-bottom:2px; }
+    .detail-item span { font-size:0.92em; font-weight:500; }
+    .detail-section { grid-column:1/-1; margin-top:8px; padding-top:12px; border-top:1px solid rgba(0,0,0,0.07); }
+    .detail-section h4 { font-size:0.85em; color:var(--primary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px; }
+
+    .empty-state { text-align:center; padding:60px 20px; color:var(--text-light); }
+    .empty-state div { font-size:3em; margin-bottom:12px; }
+
+    @media(max-width:768px){
+      .admin-layout { flex-direction:column; }
+      .sidebar { width:100%; height:auto; position:static; }
+      .main { padding:20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <img src="../badge.png" alt="Logo">
+        <span>Bugema University<br><small style="opacity:0.6;font-weight:400;">Admin Panel</small></span>
+      </div>
+      <nav>
+        <a href="#" class="active" onclick="showSection('registrations')">📋 Registrations</a>
+        <a href="../index.html" target="_blank">🌐 View Website</a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#" onclick="logout()">🚪 Logout</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="page-header">
+        <h1>Student Registrations</h1>
+        <p>Manage and review all submitted applications</p>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="num" id="stat-total">—</div>
+          <div class="lbl">Total Applications</div>
+        </div>
+        <div class="stat-box pending">
+          <div class="num" id="stat-pending">—</div>
+          <div class="lbl">Pending Review</div>
+        </div>
+        <div class="stat-box approved">
+          <div class="num" id="stat-approved">—</div>
+          <div class="lbl">Approved</div>
+        </div>
+        <div class="stat-box rejected">
+          <div class="num" id="stat-rejected">—</div>
+          <div class="lbl">Rejected</div>
+        </div>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <input type="text" id="search-input" placeholder="🔍  Search by name, email or ID…" oninput="loadRegistrations()">
+        <select id="status-filter" onchange="loadRegistrations()">
+          <option value="">All Statuses</option>
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+          <option value="rejected">Rejected</option>
+        </select>
+        <button class="action-btn btn-view" onclick="loadRegistrations()" style="padding:10px 18px;">↻ Refresh</button>
+      </div>
+
+      <!-- Table -->
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Programme</th>
+              <th>Mode</th>
+              <th>Status</th>
+              <th>Submitted</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="reg-table-body">
+            <tr><td colspan="8" style="text-align:center; padding:40px; color:var(--text-light);">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- Detail Modal -->
+  <div class="modal-overlay" id="detail-modal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <h2 id="modal-title" style="border:none; margin-bottom:4px;"></h2>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script>
+    const COURSES = { bit:'B.Sc. Information Technology', bcs:'B.Sc. Computer Science', dse:'Diploma Software Engineering', cwd:'Certificate Web Development' };
+    const MODES = { full_time:'Full Time', part_time:'Part Time', distance:'Distance' };
+
+    async function api(url, opts) {
+      const res = await fetch(url, opts);
+      if (res.status === 401) { window.location.href = 'index.html'; return null; }
+      return res.json();
+    }
+
+    async function loadStats() {
+      const data = await api('../api/admin_data.php?action=stats');
+      if (!data) return;
+      document.getElementById('stat-total').textContent = data.total;
+      document.getElementById('stat-pending').textContent = data.pending;
+      document.getElementById('stat-approved').textContent = data.approved;
+      document.getElementById('stat-rejected').textContent = data.rejected;
+    }
+
+    async function loadRegistrations() {
+      const search = document.getElementById('search-input').value;
+      const status = document.getElementById('status-filter').value;
+      const params = new URLSearchParams({ action: 'list', search, status });
+      const data = await api('../api/admin_data.php?' + params);
+      if (!data) return;
+
+      const tbody = document.getElementById('reg-table-body');
+      if (!data.length) {
+        tbody.innerHTML = '<tr><td colspan="8"><div class="empty-state"><div>📭</div>No applications found.</div></td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = data.map(r => `
+        <tr>
+          <td style="color:var(--text-light);">BU-2026-${String(r.id).padStart(4,'0')}</td>
+          <td><strong>${r.full_name}</strong></td>
+          <td style="color:var(--text-light);">${r.email}</td>
+          <td>${COURSES[r.course] || r.course}</td>
+          <td>${MODES[r.study_mode] || r.study_mode}</td>
+          <td><span class="status-badge ${r.status}">${r.status}</span></td>
+          <td style="color:var(--text-light);">${new Date(r.submitted_at).toLocaleDateString()}</td>
+          <td style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button class="action-btn btn-view" onclick="viewDetail(${r.id})">View</button>
+            ${r.status !== 'approved' ? `<button class="action-btn btn-approve" onclick="updateStatus(${r.id},'approved')">✓</button>` : ''}
+            ${r.status !== 'rejected' ? `<button class="action-btn btn-reject" onclick="updateStatus(${r.id},'rejected')">✗</button>` : ''}
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    async function viewDetail(id) {
+      const r = await api('../api/admin_data.php?action=detail&id=' + id);
+      if (!r || r.error) return;
+      document.getElementById('modal-title').textContent = r.full_name;
+      document.getElementById('modal-body').innerHTML = `
+        <span class="status-badge ${r.status}" style="margin-bottom:16px; display:inline-block;">${r.status}</span>
+        <div class="detail-grid">
+          <div class="detail-section"><h4>Personal</h4></div>
+          <div class="detail-item"><label>Date of Birth</label><span>${r.date_of_birth}</span></div>
+          <div class="detail-item"><label>Gender</label><span>${r.gender}</span></div>
+          <div class="detail-item"><label>Nationality</label><span>${r.nationality}</span></div>
+          <div class="detail-item"><label>National ID</label><span>${r.national_id}</span></div>
+
+          <div class="detail-section"><h4>Contact</h4></div>
+          <div class="detail-item"><label>Email</label><span>${r.email}</span></div>
+          <div class="detail-item"><label>Phone</label><span>${r.phone}</span></div>
+          <div class="detail-item"><label>District</label><span>${r.district}</span></div>
+          <div class="detail-item"><label>Address</label><span>${r.address}</span></div>
+
+          <div class="detail-section"><h4>Programme</h4></div>
+          <div class="detail-item"><label>Course</label><span>${COURSES[r.course]}</span></div>
+          <div class="detail-item"><label>Entry Year</label><span>${r.entry_year}</span></div>
+          <div class="detail-item"><label>Study Mode</label><span>${MODES[r.study_mode]}</span></div>
+
+          <div class="detail-section"><h4>Qualifications</h4></div>
+          <div class="detail-item"><label>O-Level School</label><span>${r.o_level_school}</span></div>
+          <div class="detail-item"><label>O-Level Year / Grade</label><span>${r.o_level_year} / ${r.o_level_grade}</span></div>
+          ${r.a_level_school ? `<div class="detail-item"><label>A-Level School</label><span>${r.a_level_school}</span></div><div class="detail-item"><label>A-Level Year / Grade</label><span>${r.a_level_year} / ${r.a_level_grade}</span></div>` : ''}
+          ${r.diploma_school ? `<div class="detail-item"><label>Diploma Institution</label><span>${r.diploma_school}</span></div><div class="detail-item"><label>Diploma Year / Grade</label><span>${r.diploma_year} / ${r.diploma_grade}</span></div>` : ''}
+
+          <div class="detail-section"><h4>Emergency Contact</h4></div>
+          <div class="detail-item"><label>Name</label><span>${r.emergency_name}</span></div>
+          <div class="detail-item"><label>Relationship</label><span>${r.emergency_relation}</span></div>
+          <div class="detail-item"><label>Phone</label><span>${r.emergency_phone}</span></div>
+
+          <div class="detail-section"><h4>Actions</h4></div>
+          <div style="grid-column:1/-1; display:flex; gap:10px;">
+            ${r.status !== 'approved' ? `<button class="action-btn btn-approve" style="padding:8px 20px;" onclick="updateStatus(${r.id},'approved'); closeModal();">✓ Approve</button>` : ''}
+            ${r.status !== 'rejected' ? `<button class="action-btn btn-reject" style="padding:8px 20px;" onclick="updateStatus(${r.id},'rejected'); closeModal();">✗ Reject</button>` : ''}
+            ${r.status !== 'pending' ? `<button class="action-btn btn-view" style="padding:8px 20px;" onclick="updateStatus(${r.id},'pending'); closeModal();">↺ Reset to Pending</button>` : ''}
+          </div>
+        </div>
+      `;
+      document.getElementById('detail-modal').classList.add('open');
+    }
+
+    async function updateStatus(id, status) {
+      const data = new FormData();
+      data.append('id', id); data.append('status', status);
+      await api('../api/admin_data.php?action=update_status', { method: 'POST', body: data });
+      loadRegistrations(); loadStats();
+    }
+
+    function closeModal() { document.getElementById('detail-modal').classList.remove('open'); }
+
+    async function logout() {
+      await api('../api/admin_data.php?action=logout');
+      window.location.href = 'index.html';
+    }
+
+    // Close modal on overlay click
+    document.getElementById('detail-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    // Init
+    loadStats();
+    loadRegistrations();
+    setInterval(() => { loadStats(); loadRegistrations(); }, 30000); // auto-refresh every 30s
+  </script>
+</body>
+</html>

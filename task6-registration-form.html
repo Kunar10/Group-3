@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration — Bugema University</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .section-title {
+      background: var(--gradient);
+      color: white;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 0.95em;
+      font-weight: 700;
+      margin: 30px 0 18px;
+      letter-spacing: 0.5px;
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-grid .full { grid-column: 1 / -1; }
+    .required-star { color: #f5576c; }
+    .hint { font-size: 0.78em; color: var(--text-light); margin-top: 4px; }
+    @media(max-width:600px){ .form-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <a href="index.html">🏠 Hub</a>
+      <a href="task1-department.html">Department</a>
+      <a href="task2-profile.html">Profile</a>
+      <a href="task3-timetable.html">Timetable</a>
+      <a href="task5-useful-links.html">Resources</a>
+      <a href="task6-registration-form.html" class="active">Register</a>
+      <a href="task7-home.html">Website</a>
+    </nav>
+
+    <div class="hero">
+      <img src="badge.png" alt="Bugema University Logo">
+      <h1>Student Registration</h1>
+      <p>Apply to the Department of Computing and Informatics — Academic Year 2026</p>
+    </div>
+
+    <div class="page-content" style="max-width: 780px; margin: 0 auto;">
+
+      <!-- Success Message -->
+      <div id="success-msg" style="display:none; text-align:center; padding:50px 30px; background: rgba(67,233,123,0.08); border-radius: var(--radius); border: 2px solid #43e97b;">
+        <div style="font-size:4em; margin-bottom:16px;">🎉</div>
+        <h2 style="color: #2d8a4e; border:none; justify-content:center;">Application Submitted!</h2>
+        <p style="color: var(--text-light);">Your application has been received. You will be contacted via email within 5–7 working days.</p>
+        <p id="ref-num" style="font-weight:700; color: var(--primary); font-size:1.1em;"></p>
+        <a href="index.html" class="btn" style="margin-top: 20px;">Back to Hub →</a>
+      </div>
+
+      <div id="error-msg" style="display:none; padding:16px 20px; background: rgba(245,87,108,0.1); border-radius: var(--radius-sm); border-left: 4px solid #f5576c; margin-bottom: 20px; color: #c0392b;"></div>
+
+      <form id="reg-form" novalidate>
+
+        <!-- 1. Personal Information -->
+        <div class="section-title">1. Personal Information</div>
+        <div class="form-grid">
+          <div class="form-row full">
+            <label>Full Legal Name <span class="required-star">*</span></label>
+            <input type="text" name="full_name" placeholder="As it appears on your national ID" required>
+          </div>
+          <div class="form-row">
+            <label>Date of Birth <span class="required-star">*</span></label>
+            <input type="date" name="date_of_birth" required>
+          </div>
+          <div class="form-row">
+            <label>Gender <span class="required-star">*</span></label>
+            <select name="gender" required>
+              <option value="">— Select —</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Nationality <span class="required-star">*</span></label>
+            <input type="text" name="nationality" placeholder="e.g., Ugandan" required>
+          </div>
+          <div class="form-row">
+            <label>National ID / Passport No. <span class="required-star">*</span></label>
+            <input type="text" name="national_id" placeholder="e.g., CM9200012345XXXX" required>
+          </div>
+        </div>
+
+        <!-- 2. Contact Details -->
+        <div class="section-title">2. Contact Details</div>
+        <div class="form-grid">
+          <div class="form-row">
+            <label>Phone Number <span class="required-star">*</span></label>
+            <input type="tel" name="phone" placeholder="+256 7XX XXX XXX" required>
+          </div>
+          <div class="form-row">
+            <label>Email Address <span class="required-star">*</span></label>
+            <input type="email" name="email" placeholder="your.email@example.com" required>
+          </div>
+          <div class="form-row">
+            <label>District of Residence <span class="required-star">*</span></label>
+            <input type="text" name="district" placeholder="e.g., Kampala" required>
+          </div>
+          <div class="form-row full">
+            <label>Postal / Physical Address <span class="required-star">*</span></label>
+            <input type="text" name="address" placeholder="P.O Box or street address" required>
+          </div>
+        </div>
+
+        <!-- 3. Programme Selection -->
+        <div class="section-title">3. Programme Selection</div>
+        <div class="form-grid">
+          <div class="form-row">
+            <label>Programme Applied For <span class="required-star">*</span></label>
+            <select name="course" required>
+              <option value="">— Select Programme —</option>
+              <option value="bit">Bachelor of Information Technology (4 yrs)</option>
+              <option value="bcs">Bachelor of Computer Science (4 yrs)</option>
+              <option value="dse">Diploma in Software Engineering (2 yrs)</option>
+              <option value="cwd">Certificate in Web Development (1 yr)</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Intended Entry Year <span class="required-star">*</span></label>
+            <select name="entry_year" required>
+              <option value="">— Select Year —</option>
+              <option value="2026">2026</option>
+              <option value="2027">2027</option>
+            </select>
+          </div>
+          <div class="form-row full">
+            <label>Mode of Study <span class="required-star">*</span></label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="full_time" name="study_mode" value="full_time">
+                <label for="full_time">Full Time</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="part_time" name="study_mode" value="part_time">
+                <label for="part_time">Part Time</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="distance" name="study_mode" value="distance">
+                <label for="distance">Distance Learning</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Academic Qualifications -->
+        <div class="section-title">4. Academic Qualifications</div>
+
+        <p style="font-size:0.9em; color:var(--text-light); margin-bottom:16px;">Provide your highest qualifications. O-Level is mandatory. Attach certified copies of certificates when submitting physical documents.</p>
+
+        <div style="background: var(--bg); border-radius: var(--radius-sm); padding: 20px; margin-bottom: 16px;">
+          <h3 style="margin-top:0;">O-Level (UCE) <span class="required-star">*</span></h3>
+          <div class="form-grid">
+            <div class="form-row">
+              <label>School Name <span class="required-star">*</span></label>
+              <input type="text" name="o_level_school" placeholder="Name of secondary school" required>
+            </div>
+            <div class="form-row">
+              <label>Year of Completion <span class="required-star">*</span></label>
+              <input type="number" name="o_level_year" placeholder="e.g., 2022" min="2000" max="2026" required>
+            </div>
+            <div class="form-row">
+              <label>Aggregate Grade <span class="required-star">*</span></label>
+              <select name="o_level_grade" required>
+                <option value="">— Select —</option>
+                <option value="D1">Division 1 (D1)</option>
+                <option value="D2">Division 2 (D2)</option>
+                <option value="D3">Division 3 (D3)</option>
+                <option value="D4">Division 4 (D4)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: var(--bg); border-radius: var(--radius-sm); padding: 20px; margin-bottom: 16px;">
+          <h3 style="margin-top:0;">A-Level (UACE) <span style="font-size:0.8em; color:var(--text-light); font-weight:400;">(if applicable)</span></h3>
+          <div class="form-grid">
+            <div class="form-row">
+              <label>School Name</label>
+              <input type="text" name="a_level_school" placeholder="Name of school">
+            </div>
+            <div class="form-row">
+              <label>Year of Completion</label>
+              <input type="number" name="a_level_year" placeholder="e.g., 2024" min="2000" max="2026">
+            </div>
+            <div class="form-row">
+              <label>Points / Grade</label>
+              <input type="text" name="a_level_grade" placeholder="e.g., 15 points / BCC">
+            </div>
+          </div>
+        </div>
+
+        <div style="background: var(--bg); border-radius: var(--radius-sm); padding: 20px; margin-bottom: 16px;">
+          <h3 style="margin-top:0;">Diploma / Certificate <span style="font-size:0.8em; color:var(--text-light); font-weight:400;">(if applicable)</span></h3>
+          <div class="form-grid">
+            <div class="form-row">
+              <label>Institution Name</label>
+              <input type="text" name="diploma_school" placeholder="Name of institution">
+            </div>
+            <div class="form-row">
+              <label>Year of Completion</label>
+              <input type="number" name="diploma_year" placeholder="e.g., 2023" min="2000" max="2026">
+            </div>
+            <div class="form-row">
+              <label>Classification / Grade</label>
+              <input type="text" name="diploma_grade" placeholder="e.g., Credit / Distinction">
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Emergency Contact -->
+        <div class="section-title">5. Emergency Contact</div>
+        <div class="form-grid">
+          <div class="form-row">
+            <label>Contact Full Name <span class="required-star">*</span></label>
+            <input type="text" name="emergency_name" placeholder="Parent / Guardian name" required>
+          </div>
+          <div class="form-row">
+            <label>Relationship <span class="required-star">*</span></label>
+            <input type="text" name="emergency_relation" placeholder="e.g., Father, Mother, Sibling" required>
+          </div>
+          <div class="form-row">
+            <label>Phone Number <span class="required-star">*</span></label>
+            <input type="tel" name="emergency_phone" placeholder="+256 7XX XXX XXX" required>
+          </div>
+        </div>
+
+        <!-- 6. Declaration -->
+        <div class="section-title">6. Declaration</div>
+        <div style="background: rgba(108,99,255,0.04); border: 1px solid rgba(108,99,255,0.2); border-radius: var(--radius-sm); padding: 20px; margin-bottom: 20px;">
+          <p style="font-size:0.9em; margin-bottom:14px;">I hereby declare that all information provided in this application is true, accurate, and complete to the best of my knowledge. I understand that providing false information may result in the cancellation of my application or expulsion from the university.</p>
+          <label style="display:flex; align-items:flex-start; gap:12px; cursor:pointer; font-weight:500;">
+            <input type="checkbox" name="declaration" id="declaration" style="width:18px; height:18px; margin-top:2px; accent-color: var(--primary); flex-shrink:0;" required>
+            <span>I agree to the above declaration and the university's terms and conditions. <span class="required-star">*</span></span>
+          </label>
+        </div>
+
+        <div id="form-error" style="display:none; color:#c0392b; font-size:0.9em; margin-bottom:12px; padding:10px 14px; background:rgba(245,87,108,0.08); border-radius:var(--radius-sm);"></div>
+
+        <input type="submit" value="Submit Application →">
+        <p class="hint" style="margin-top:12px;">Fields marked <span class="required-star">*</span> are required. You will receive a confirmation email after submission.</p>
+      </form>
+    </div>
+
+    <div class="footer">
+      <p>© 2026 Bugema University — Department of Computing and Informatics</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('reg-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const errBox = document.getElementById('form-error');
+      errBox.style.display = 'none';
+
+      // Validate study mode
+      if (!document.querySelector('input[name="study_mode"]:checked')) {
+        errBox.textContent = 'Please select a mode of study.';
+        errBox.style.display = 'block';
+        errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+      if (!document.getElementById('declaration').checked) {
+        errBox.textContent = 'You must agree to the declaration to proceed.';
+        errBox.style.display = 'block';
+        return;
+      }
+
+      const btn = this.querySelector('input[type="submit"]');
+      btn.value = 'Submitting…';
+      btn.disabled = true;
+
+      const data = new FormData(this);
+
+      try {
+        const res = await fetch('api/register.php', { method: 'POST', body: data });
+        const json = await res.json();
+
+        if (json.success) {
+          this.style.display = 'none';
+          document.getElementById('success-msg').style.display = 'block';
+          document.getElementById('ref-num').textContent = 'Reference No: BU-2026-' + String(json.id).padStart(4, '0');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          errBox.textContent = json.error || 'Submission failed. Please try again.';
+          errBox.style.display = 'block';
+          btn.value = 'Submit Application →';
+          btn.disabled = false;
+        }
+      } catch (err) {
+        errBox.textContent = 'Network error. Make sure the server is running.';
+        errBox.style.display = 'block';
+        btn.value = 'Submit Application →';
+        btn.disabled = false;
+      }
+    });
+  </script>
+  <script src="interactivity.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login — Bugema University</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: var(--gradient); }
+    .login-box { background: white; border-radius: var(--radius); padding: 48px 40px; width: 100%; max-width: 420px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+    .login-box img { width: 80px; height: 80px; object-fit: contain; margin: 0 auto 20px; display: block; border-radius: 50%; border: 3px solid rgba(108,99,255,0.2); padding: 6px; }
+    .login-box h2 { text-align: center; margin-bottom: 6px; border: none; font-size: 1.5em; }
+    .login-box p { text-align: center; color: var(--text-light); font-size: 0.9em; margin-bottom: 28px; }
+    #login-error { display:none; color:#c0392b; font-size:0.88em; padding:10px 14px; background:rgba(245,87,108,0.08); border-radius:var(--radius-sm); margin-bottom:14px; }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <img src="../badge.png" alt="Logo">
+    <h2>Admin Portal</h2>
+    <p>Bugema University — Department of Computing</p>
+    <div id="login-error"></div>
+    <form id="login-form">
+      <div class="form-row">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="admin" required autofocus>
+      </div>
+      <div class="form-row">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="••••••••" required>
+      </div>
+      <input type="submit" value="Sign In →" style="width:100%; margin-top:8px;">
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const err = document.getElementById('login-error');
+      err.style.display = 'none';
+      const btn = this.querySelector('input[type="submit"]');
+      btn.value = 'Signing in…'; btn.disabled = true;
+
+      const data = new FormData(this);
+      try {
+        const res = await fetch('../api/admin_login.php', { method: 'POST', body: data });
+        const json = await res.json();
+        if (json.success) {
+          window.location.href = 'dashboard.html';
+        } else {
+          err.textContent = json.error || 'Login failed.';
+          err.style.display = 'block';
+          btn.value = 'Sign In →'; btn.disabled = false;
+        }
+      } catch {
+        err.textContent = 'Server error. Is WAMP running?';
+        err.style.display = 'block';
+        btn.value = 'Sign In →'; btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
