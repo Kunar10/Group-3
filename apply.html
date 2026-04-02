@@ -1,0 +1,286 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply for Programme - Department of Computing and Informatics</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .programme-banner {
+      background: var(--gradient);
+      color: white;
+      padding: 24px;
+      border-radius: var(--radius);
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    .programme-banner h2 {
+      color: white;
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+    .form-section {
+      background: var(--bg);
+      padding: 24px;
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      border-left: 4px solid var(--gold);
+    }
+    .form-section h3 {
+      margin-top: 0;
+      color: var(--navy);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <a href="index.html">Hub</a>
+      <a href="task1-department.html">Department</a>
+      <a href="faculty.html">Faculty and Staff</a>
+      <a href="task3-timetable.html">Timetable</a>
+      <a href="task5-useful-links.html">Programmes</a>
+      <a href="task6-registration-form.html">Register</a>
+      <a href="task7-home.html">Website</a>
+    </nav>
+
+    <div class="hero">
+      <img src="badge.png" alt="Bugema University Logo">
+      <h1>Apply for a Programme</h1>
+      <p>Take the next step in your academic journey</p>
+    </div>
+
+    <div class="page-content">
+      <div class="programme-banner">
+        <h2 id="programmeName">Select Programme</h2>
+        <p id="programmeInfo" style="margin: 8px 0 0; opacity: 0.9; font-size: 0.95em;"></p>
+      </div>
+
+      <form id="applicationForm" method="POST" action="api/apply.php">
+        
+        <!-- Programme Selection -->
+        <div class="form-section">
+          <h3>Programme Information</h3>
+          
+          <div class="form-row">
+            <label for="programme">Selected Programme *</label>
+            <input type="hidden" id="programme" name="programme" required />
+            <input type="text" id="programmeDisplay" placeholder="Programme name" disabled style="background: rgba(0,51,102,0.05);" />
+          </div>
+        </div>
+
+        <!-- Personal Information -->
+        <div class="form-section">
+          <h3>Personal Information</h3>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-row">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" name="first_name" placeholder="John" required />
+            </div>
+            <div class="form-row">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" name="last_name" placeholder="Doe" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" placeholder="john.doe@example.com" required />
+          </div>
+
+          <div class="form-row">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" placeholder="+256 XXX XXX XXX" required />
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-row">
+              <label for="dob">Date of Birth *</label>
+              <input type="date" id="dob" name="date_of_birth" required />
+            </div>
+            <div class="form-row">
+              <label for="gender">Gender *</label>
+              <select id="gender" name="gender" required>
+                <option value="">-- Select Gender --</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education Background -->
+        <div class="form-section">
+          <h3>Education Background</h3>
+
+          <div class="form-row">
+            <label for="highSchool">High School / Secondary School Name</label>
+            <input type="text" id="highSchool" name="high_school" placeholder="Name of your school" />
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-row">
+              <label for="gradYear">Graduation Year</label>
+              <input type="number" id="gradYear" name="graduation_year" placeholder="2022" min="1990" max="2030" />
+            </div>
+            <div class="form-row">
+              <label for="gpa">GPA / Grades (0-4.0)</label>
+              <input type="number" id="gpa" name="gpa" placeholder="3.5" min="0" max="4" step="0.1" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="qualifications">Relevant Qualifications</label>
+            <textarea id="qualifications" name="qualifications" placeholder="List any relevant certifications or additional qualifications (e.g., CCNA, A+, etc.)" rows="3"></textarea>
+          </div>
+        </div>
+
+        <!-- Contact & Address -->
+        <div class="form-section">
+          <h3>Contact & Address</h3>
+
+          <div class="form-row">
+            <label for="address">Residential Address</label>
+            <input type="text" id="address" name="address" placeholder="Street address" />
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-row">
+              <label for="city">City / District</label>
+              <input type="text" id="city" name="city" placeholder="Kampala" />
+            </div>
+            <div class="form-row">
+              <label for="country">Country</label>
+              <input type="text" id="country" name="country" placeholder="Uganda" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Application Details -->
+        <div class="form-section">
+          <h3>Application Details</h3>
+
+          <div class="form-row">
+            <label for="motivation">Why are you interested in this programme? *</label>
+            <textarea id="motivation" name="motivation" placeholder="Tell us about your motivation for applying to this programme..." rows="4" required></textarea>
+          </div>
+
+          <div class="form-row">
+            <label for="experience">Work/Professional Experience (if any)</label>
+            <textarea id="experience" name="experience" placeholder="Describe any relevant work or professional experience" rows="3"></textarea>
+          </div>
+
+          <div class="form-row">
+            <label for="reference">Reference Person (Name & Contact)</label>
+            <input type="text" id="reference" name="reference" placeholder="Name and phone number of a reference" />
+          </div>
+        </div>
+
+        <!-- Study Mode -->
+        <div class="form-section">
+          <h3>Preferred Study Mode</h3>
+
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="study_mode" value="Full-time" required />
+              <span>Full-time</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="study_mode" value="Part-time" />
+              <span>Part-time</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="study_mode" value="Online" />
+              <span>Online</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Terms & Conditions -->
+        <div class="form-section">
+          <div class="form-row">
+            <label class="radio-option" style="flex-direction: row; padding: 0;">
+              <input type="checkbox" id="agree" name="agree_terms" required />
+              <label for="agree" style="margin: 0; font-weight: 500; font-size: 0.9em;">I confirm that the information provided is accurate and complete. I agree to the terms and conditions of Bugema University.</label>
+            </label>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div style="text-align: center; margin-top: 32px;">
+          <input type="submit" value="Submit Application" />
+          <a href="task5-useful-links.html" class="btn btn-outline" style="margin-left: 12px;">Cancel</a>
+        </div>
+      </form>
+    </div>
+
+    <div class="footer">
+      <p>Â© 2026 Bugema University - Department of Computing and Informatics</p>
+    </div>
+  </div>
+
+  <script>
+    // Extract programme from URL parameter
+    function getProgrammeFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('programme');
+    }
+
+    // Populate form with programme
+    function populateProgramme() {
+      const programme = getProgrammeFromURL();
+      
+      if (!programme) {
+        document.getElementById('programmeName').textContent = 'Error: No programme selected';
+        alert('Please select a programme from the Programmes page.');
+        return;
+      }
+
+      // Set the form fields
+      document.getElementById('programme').value = programme;
+      document.getElementById('programmeDisplay').value = programme;
+      document.getElementById('programmeName').textContent = programme;
+      
+      // Add programme-specific info
+      const programmeInfo = {
+        'Bachelor of Science in Computer Science': '4-year full-time programme covering algorithms, software development, and AI',
+        'Bachelor of Science in Software Engineering': '4-year full-time programme focused on software design and mobile development',
+        'Bachelor of Science in Information Technology': '4-year full-time programme on IT infrastructure and cybersecurity',
+        'Bachelor of Science in Data Science': '4-year full-time programme in data analytics and machine learning',
+        'Master of Science in Computer Science': '2-year postgraduate programme in advanced computing topics',
+        'Master of Science in Cybersecurity': '2-year specialization in network security and ethical hacking',
+        'Master of Science in Artificial Intelligence': '2-year programme in deep learning and AI applications',
+        'Diploma in Web Development': '2-year diploma in full-stack web development',
+        'Diploma in Database Administration': '2-year diploma in database design and management',
+        'Certificate in IT Support and Help Desk': '6-month certificate in IT support services',
+        'Certificate in Network Administration': '6-month certificate in network setup and management'
+      };
+
+      document.getElementById('programmeInfo').textContent = programmeInfo[programme] || '';
+    }
+
+    // Run on page load
+    document.addEventListener('DOMContentLoaded', populateProgramme);
+
+    // Form submission
+    document.getElementById('applicationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Show success message
+      alert('Application submitted successfully! You will receive a confirmation email soon.');
+      
+      // Reset form
+      this.reset();
+      
+      // Redirect to programmes page
+      setTimeout(() => {
+        window.location.href = 'task5-useful-links.html';
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
+

@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login  Bugema University Portal</title>
+  <title>Login - Bugema University Portal</title>
+  <meta http-equiv="refresh" content="0; url=https://erms.bugemauniv.ac.ug/student/login/">
   <link rel="stylesheet" href="styles.css">
   <style>
     body { min-height:100vh; display:flex; align-items:center; justify-content:center; background:var(--gradient); padding:20px; }
@@ -42,6 +43,13 @@
   </style>
 </head>
 <body>
+  <script>window.location.replace("https://erms.bugemauniv.ac.ug/student/login/");</script>
+  <div style="font-family:Inter,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--gradient);color:white;text-align:center;padding:20px;">
+    <div>
+      <p style="font-size:1.1em;margin-bottom:12px;">Redirecting to the university portal...</p>
+      <a href="https://erms.bugemauniv.ac.ug/student/login/" style="color:#E8B020;">Click here if not redirected</a>
+    </div>
+  </div>
   <div class="login-wrap">
     <div class="login-header">
       <img src="badge.png" alt="Bugema University Logo">
@@ -160,7 +168,7 @@
           btn.value = 'Sign In '; btn.disabled = false;
         }
       } catch {
-        err.textContent = 'Server error. Make sure WAMP is running.';
+        err.textContent = 'Cannot reach server. Open this page from http://localhost/bugema/login.html — not from the Desktop.';
         err.style.display = 'block';
         btn.value = 'Sign In '; btn.disabled = false;
       }

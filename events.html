@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events - Department of Computing and Informatics | Bugema University</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .event-card { background:white; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--border); transition:var(--transition); display:flex; }
+    .event-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); border-color:rgba(200,150,12,0.3); }
+    .event-date-block { background:var(--gradient); color:white; padding:20px 18px; text-align:center; min-width:90px; display:flex; flex-direction:column; align-items:center; justify-content:center; flex-shrink:0; }
+    .event-date-block .day { font-size:2em; font-weight:800; color:var(--gold-light); line-height:1; }
+    .event-date-block .month { font-size:0.78em; font-weight:600; opacity:0.85; text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
+    .event-date-block .year { font-size:0.72em; opacity:0.65; margin-top:2px; }
+    .event-body { padding:20px 24px; flex:1; }
+    .event-body h4 { color:var(--navy); font-size:1em; font-weight:700; margin-bottom:6px; }
+    .event-body p { font-size:0.87em; color:var(--text-light); margin:0 0 10px; }
+    .event-meta { display:flex; gap:16px; flex-wrap:wrap; font-size:0.8em; color:var(--text-light); }
+    .event-tag { display:inline-block; padding:2px 10px; border-radius:50px; font-size:0.75em; font-weight:600; background:rgba(0,51,102,0.08); color:var(--navy); border:1px solid rgba(0,51,102,0.15); margin-bottom:8px; margin-right:4px; }
+    .event-tag.gold { background:rgba(200,150,12,0.12); color:#8B6508; border-color:rgba(200,150,12,0.3); }
+    .event-tag.past { background:rgba(90,106,126,0.1); color:var(--text-light); border-color:rgba(90,106,126,0.2); }
+    .filter-bar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px; }
+    .filter-btn { padding:7px 18px; border-radius:50px; border:2px solid var(--border); background:white; color:var(--text-light); font-size:0.83em; font-weight:600; cursor:pointer; transition:var(--transition); }
+    .filter-btn:hover, .filter-btn.active { background:var(--navy); color:white; border-color:var(--navy); }
+    @media(max-width:600px){ .event-card { flex-direction:column; } .event-date-block { flex-direction:row; gap:8px; padding:14px 20px; min-width:unset; } }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="top-bar">
+    <span>Virtual Directorate Building, Bugema University, Kampala Uganda</span>
+    <span><a href="mailto:bugemauniversity@gmail.com">bugemauniversity@gmail.com</a> &nbsp;|&nbsp; <a href="tel:+256781715480">+256 781715480</a></span>
+  </div>
+  <div class="container">
+    <nav role="navigation" aria-label="Main navigation">
+      <a href="index.html" class="nav-brand">
+        <img src="badge.png" alt="Bugema University Logo">
+        <span>Bugema<br>University</span>
+      </a>
+      <a href="task7-home.html">Home</a>
+      <a href="task7-about.html">About</a>
+      <a href="task1-department.html">Department</a>
+      <a href="faculty.html">Faculty and Staff</a>
+      <a href="task3-timetable.html">Timetable</a>
+      <a href="task5-useful-links.html">Resources</a>
+      <a href="courses.html">Programmes</a>
+      <a href="research.html">Research</a>
+      <a href="events.html" class="active">Events</a>
+      <a href="task7-contact.html">Contact</a>
+      <a href="task6-registration-form.html" style="background:var(--gold);color:var(--navy);font-weight:700;">Apply Now</a>
+      <a href="https://erms.bugemauniv.ac.ug/student/login/" target="_blank" rel="noopener noreferrer" style="background:rgba(200,150,12,0.15);border:1px solid var(--gold);color:var(--gold-light);">Login</a>
+    </nav>
+
+    <div class="hero">
+      <img src="badge.png" alt="Bugema University Crest">
+      <h1>Events</h1>
+      <p>Seminars, symposiums, workshops, and department activities</p>
+      <div class="hero-badges">
+        <span class="hero-badge">Upcoming Events</span>
+        <span class="hero-badge">Workshops</span>
+        <span class="hero-badge">Symposiums</span>
+      </div>
+    </div>
+
+    <main id="main-content">
+      <div class="page-content">
+
+        <div class="announcement reveal">
+          <span class="icon">📅</span>
+          <p><strong>Next Event:</strong> Annual Tech Symposium 2026 — 15th May 2026 at the Main Hall. <a href="task6-registration-form.html">Register to attend</a>.</p>
+        </div>
+
+        <div class="filter-bar" style="margin-top:32px;">
+          <button class="filter-btn active" onclick="filterEvents('all',this)">All Events</button>
+          <button class="filter-btn" onclick="filterEvents('upcoming',this)">Upcoming</button>
+          <button class="filter-btn" onclick="filterEvents('past',this)">Past</button>
+          <button class="filter-btn" onclick="filterEvents('symposium',this)">Symposiums</button>
+          <button class="filter-btn" onclick="filterEvents('workshop',this)">Workshops</button>
+          <button class="filter-btn" onclick="filterEvents('seminar',this)">Seminars</button>
+        </div>
+
+        <div id="events-list">
+
+          <div class="event-card reveal" data-category="upcoming symposium" style="margin-bottom:16px;">
+            <div class="event-date-block">
+              <span class="day">15</span><span class="month">May</span><span class="year">2026</span>
+            </div>
+            <div class="event-body">
+              <span class="event-tag gold">Upcoming</span><span class="event-tag">Symposium</span>
+              <h4>Annual Tech Symposium 2026</h4>
+              <p>The flagship annual event bringing together students, faculty, and industry leaders to discuss the latest trends in computing and technology. Features keynote speakers, panel discussions, and student project showcases.</p>
+              <div class="event-meta">
+                <span>🕘 9:00 AM – 5:00 PM</span>
+                <span>📍 Main Hall, Bugema University</span>
+                <span>🎟 Open to all</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card reveal" data-category="upcoming workshop" style="margin-bottom:16px;">
+            <div class="event-date-block">
+              <span class="day">28</span><span class="month">Apr</span><span class="year">2026</span>
+            </div>
+            <div class="event-body">
+              <span class="event-tag gold">Upcoming</span><span class="event-tag">Workshop</span>
+              <h4>Cybersecurity Awareness Workshop</h4>
+              <p>A hands-on workshop covering ethical hacking basics, password security, phishing awareness, and safe online practices. Open to all students and staff.</p>
+              <div class="event-meta">
+                <span>🕙 10:00 AM – 2:00 PM</span>
+                <span>📍 Computer Lab 2, Block C</span>
+                <span>🎟 Students &amp; Staff</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card reveal" data-category="upcoming seminar" style="margin-bottom:16px;">
+            <div class="event-date-block">
+              <span class="day">10</span><span class="month">May</span><span class="year">2026</span>
+            </div>
+            <div class="event-body">
+              <span class="event-tag gold">Upcoming</span><span class="event-tag">Seminar</span>
+              <h4>AI in Healthcare — Guest Lecture</h4>
+              <p>A guest lecture on the application of machine learning in medical diagnosis and healthcare delivery in sub-Saharan Africa.</p>
+              <div class="event-meta">
+                <span>🕑 2:00 PM – 4:00 PM</span>
+                <span>📍 Lecture Hall A</span>
+                <span>🎟 Open to all</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card reveal" data-category="past symposium" style="margin-bottom:16px;">
+            <div class="event-date-block" style="background:rgba(90,106,126,0.15);">
+              <span class="day" style="color:var(--text-light);">20</span>
+              <span class="month" style="color:var(--text-light);">Feb</span>
+              <span class="year" style="color:var(--text-light);">2026</span>
+            </div>
+            <div class="event-body">
+              <span class="event-tag past">Past</span><span class="event-tag">Symposium</span>
+              <h4>Annual Tech Symposium 2025</h4>
+              <p>Over 200 students and industry guests attended. Topics included cloud computing, fintech, and the future of work in Uganda's digital economy.</p>
+              <div class="event-meta">
+                <span>📍 Main Hall, Bugema University</span>
+                <span>👥 200+ Attendees</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card reveal" data-category="past workshop" style="margin-bottom:16px;">
+            <div class="event-date-block" style="background:rgba(90,106,126,0.15);">
+              <span class="day" style="color:var(--text-light);">14</span>
+              <span class="month" style="color:var(--text-light);">Nov</span>
+              <span class="year" style="color:var(--text-light);">2025</span>
+            </div>
+            <div class="event-body">
+              <span class="event-tag past">Past</span><span class="event-tag">Workshop</span>
+              <h4>Web Development Bootcamp</h4>
+              <p>A two-day intensive bootcamp covering HTML, CSS, JavaScript, and React fundamentals. 45 students completed the programme and received certificates.</p>
+              <div class="event-meta">
+                <span>📍 Computer Lab 1, Block C</span>
+                <span>👥 45 Participants</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card reveal" data-category="past seminar" style="margin-bottom:16px;">
+            <div class="event-date-block" style="background:rgba(90,106,126,0.15);">
+              <span class="day" style="color:var(--text-light);">08</span>
+              <span class="month" style="color:var(--text-light);">Oct</span>
+              <span class="year" style="color:var(--text-light);">2025</span>
+            </div>
+            <div class="event-body">
+              <span class="event-tag past">Past</span><span class="event-tag">Seminar</span>
+              <h4>Industry Partnership Signing Ceremony</h4>
+              <p>Bugema University signed a memorandum of understanding with a leading tech firm to provide internship and job placement opportunities for computing students.</p>
+              <div class="event-meta">
+                <span>📍 Senate Room, Administration Block</span>
+                <span>👥 Faculty &amp; Industry Guests</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card reveal" style="margin-top:48px; background:rgba(0,51,102,0.03); border-color:rgba(0,51,102,0.15); text-align:center; padding:40px;">
+          <h3 style="font-size:1.3em; margin-top:0;">Suggest or Host an Event</h3>
+          <p style="max-width:560px; margin:0 auto 24px;">Have an idea for a workshop, seminar, or community event? Reach out to the department office and we will help make it happen.</p>
+          <a href="task7-contact.html" class="btn">Get in Touch</a>
+        </div>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-top">
+        <div class="footer-col"><h4>Bugema University</h4><p>Department of Computing and Informatics</p><p>Virtual Directorate Building</p><p>P.O Box 6529, Kampala, Uganda</p></div>
+        <div class="footer-col"><h4>Quick Links</h4><a href="task7-home.html">Home</a><a href="task7-about.html">About</a><a href="courses.html">Programmes</a><a href="research.html">Research</a><a href="events.html">Events</a></div>
+        <div class="footer-col"><h4>Events</h4><a href="events.html">Upcoming Events</a><a href="events.html">Past Events</a><a href="task7-contact.html">Host an Event</a></div>
+        <div class="footer-col"><h4>Contact</h4><a href="tel:+256781715480">+256 781715480</a><a href="mailto:bugemauniversity@gmail.com">bugemauniversity@gmail.com</a><p>Mon-Fri: 9:00 AM - 5:00 PM</p></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2026 Bugema University - Department of Computing and Informatics. All rights reserved.</p></div>
+    </footer>
+  </div>
+
+  <script>
+    function filterEvents(category, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('#events-list .event-card').forEach(card => {
+        const cats = card.getAttribute('data-category') || '';
+        card.style.display = (category === 'all' || cats.includes(category)) ? 'flex' : 'none';
+      });
+    }
+  </script>
+  <script src="effects.js"></script>
+  <script src="interactivity.js"></script>
+</body>
+</html>
